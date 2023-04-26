@@ -5,6 +5,7 @@
 #include <L298N.h>
 Servo myservo; // Create a new servo object:
 #define servoPin 5 // definerar servos pin
+
 #define enA 8
 #define in1 6
 #define in2 7
