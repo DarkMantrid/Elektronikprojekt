@@ -10,12 +10,10 @@ void setup()
   // messages (only applies to boards with native USB).
   while (!Serial) {}
 
+  pinMode(remotePin, INPUT); //RemotePin pin till inport
   pinMode(enA, OUTPUT);
   pinMode(in1, OUTPUT);
   pinMode(in2, OUTPUT);
-
-  pinMode(remotePin, INPUT); //RemotePin pin till inport
-  pinMode(enA, OUTPUT);
 
   sensor.init();
   if (sensor.getLastError())
