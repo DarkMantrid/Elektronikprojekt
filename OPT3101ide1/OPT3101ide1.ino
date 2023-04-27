@@ -11,9 +11,10 @@ void setup()
   while (!Serial) {}
 
   pinMode(remotePin, INPUT); //RemotePin pin till inport
-  pinMode(enA, OUTPUT);
+  pinMode(enA, INPUT);
   pinMode(in1, OUTPUT);
   pinMode(in2, OUTPUT);
+  
 
   sensor.init();
   if (sensor.getLastError())
@@ -75,19 +76,7 @@ void loop()
           myservo.write(angle);
         }
         else myservo.write(Straight); // bilen kör framåt
-        /*
-        Serial.print("\n");
-        Serial.print("left sensor= ");
-        Serial.print(leftsensor);
-        Serial.print("\n");
-        Serial.print("Middle Sensor= ");
-        Serial.print(middlesensor);
-        Serial.print("\n");
-        Serial.print("Right Sensor= ");
-        Serial.print(rightsensor);
-        Serial.print("\n");*/
-        } 
-      
+        }
      }
      sensor.nextChannel();
      sensor.startSample();
