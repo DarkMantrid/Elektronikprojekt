@@ -3,7 +3,7 @@
 void setup()
 {
   Serial.begin(9600);
-  myservo.write(140); // sätter sensor till 90
+  myservo.write(140); // sätter sensor till 140
   Wire.begin();
   myservo.attach(servoPin); //sätter igång servo
   // Wait for the serial port to be opened before printing
