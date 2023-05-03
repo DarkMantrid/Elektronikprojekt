@@ -7,7 +7,6 @@ void setup()
   Wire.begin();
   myservo.attach(servoPin); //sätter igång servo
   // Wait for the serial port to be opened before printing
-  // messages (only applies to boards with native USB).
   while (!Serial) {}
 
   pinMode(remotePin, INPUT); //RemotePin pin till inport
@@ -35,12 +34,12 @@ void setup()
 
 void loop()
 {
-  leftsensor = distances[0]; // Döper om vänster sensor från distances[0] till leftsensor
-  middlesensor = distances[1]; // Döper om mitt sensor från distances[1] till middlesensor
-  rightsensor = distances[2]; // Döper om höger sensor från distances[2] till rightsensor
+  leftsensor = distances[0]; 
+  middlesensor = distances[1]; 
+  rightsensor = distances[2]; 
   remoteVal = digitalRead(remotePin); // Läser av insignalen från startmodulen.
 
-  if(remoteVal)
+  if(remoteVal == HIGH)
   {
    digitalWrite(in1, HIGH);
    digitalWrite(in2, LOW);
@@ -55,31 +54,36 @@ void loop()
       
        for (uint8_t i = 0; i < 3; i++)
        {
-        if (leftsensor<Safe && leftsensor<rightsensor) // if för höger sväng
+        if (leftsensor < Safe && leftsensor < rightsensor) 
         {
-          angle = map(leftsensor, Safe, NotSafe, Straight, TurnRight); // map funktion för smidigare sväng
+          angle = map(leftsensor, Safe, NotSafe, Straight, TurnRight); 
           myservo.write(angle);
         }
-        else if (rightsensor<Safe && rightsensor<leftsensor) // if för vänster sväng
+        else if (rightsensor < Safe && rightsensor < leftsensor) 
         {
           angle = map(rightsensor, Safe, NotSafe, Straight, TurnLeft);
           myservo.write(angle);
         }
-        else if (middlesensor<NotSafe && rightsensor<leftsensor) // if för höger sväng men om väggen framför närmar sig
+        else if (middlesensor < NotSafe && leftsensor < rightsensor) 
         {
           angle = map(rightsensor, Safe, Near, Straight, TurnRight);
           myservo.write(angle);
         }
-        else if (middlesensor<NotSafe && rightsensor>leftsensor) // if för vänster sväng men om väggen framför närmar sig
+        else if (middlesensor < NotSafe && rightsensor < leftsensor) 
         {
           angle = map(rightsensor, Safe, Near, Straight, TurnLeft);
           myservo.write(angle);
         }
-        else myservo.write(Straight); // bilen kör framåt
+        else myservo.write(Straight); 
         }
      }
      sensor.nextChannel();
      sensor.startSample();
    }
+  }
+  else if (remoteVal == LOW)
+  {
+    digitalWrite(in1, LOW);
+    digitalWrite(in2, LOW);
   }
 }
