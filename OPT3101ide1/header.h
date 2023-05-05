@@ -28,9 +28,9 @@ int TurnAngle = 15; // Det här är hur mycket servon kan svänga för varje rik
 int TurnLeft = Straight - TurnAngle; // Rakt - svängvinkel gör att bilen svänger till vänster om TurnLeft anropas.
 int TurnRight = Straight + TurnAngle; // Rakt + svängvinkel gör att bilen svänger till höger om TurnRight anropas.
 // namn för avstånd mätning
-int Near = 200;
+int Near = 250;
 int NotSafe = 450;
-int Safe = 600;
+int Safe = 650;
 OPT3101 sensor; // döper sensorn
 int16_t distances[3]; // aktiverar tre punkter på sensor och döper dem till distances
 volatile bool dataReady = false;
