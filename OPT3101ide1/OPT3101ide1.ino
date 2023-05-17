@@ -38,11 +38,26 @@ void loop()
   middlesensor = distances[1]; 
   rightsensor = distances[2]; 
   remoteVal = digitalRead(remotePin); // Läser av insignalen från startmodulen.
+  /*
+  Serial.print("\n");
+  Serial.print("left sensor= ");
+  Serial.print(leftsensor);
+  Serial.print("\n");
+  Serial.print("Middle Sensor= ");
+  Serial.print(middlesensor);
+  Serial.print("\n");
+  Serial.print("Right Sensor= ");
+  Serial.print(rightsensor);
+  Serial.print("\n");
+  Serial.println();
+  */
+  
 
   if(remoteVal == HIGH)
   {
-   digitalWrite(in1, HIGH);
-   digitalWrite(in2, LOW);
+
+    digitalWrite(in1, HIGH);
+    digitalWrite(in2, LOW);
 
    if (sensor.isSampleDone())
    {
@@ -74,8 +89,8 @@ void loop()
           angle = map(rightsensor, Safe, Near, Straight, TurnLeft);
           myservo.write(angle);
         }
-        else myservo.write(Straight); 
-        }
+        else myservo.write(Straight);
+      }
      }
      sensor.nextChannel();
      sensor.startSample();
